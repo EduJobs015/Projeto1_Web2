@@ -6,9 +6,9 @@ export class Livro{
     editora: string
     edicao: string
     isbn: string
-    categoriaLivro_id: number // FK ID DA CATEGORIA 
+    categoriaLivro_id: CategoriaLivro // FK ID DA CATEGORIA 
 
-    constructor(id: number,titulo: string,autor: string,editora: string,edicao: string,isbn: string,categoriaLivro_id: number){
+    constructor(id: number,titulo: string,autor: string,editora: string,edicao: string,isbn: string,categoriaLivro_id: CategoriaLivro){
         this.id = this.gerarId()
         this.titulo = titulo
         this.autor = autor
