@@ -5,6 +5,8 @@ import { CategoriaUsuario } from "../model/UsuarioBiblioteca"
 export class UsuarioRepository{
     private static instance: UsuarioRepository
     private UsuarioList: Usuario[] = []
+    private cursoList: Cursos[] = []
+    private categoriaList: CategoriaUsuario[] = []
 
     constructor(){}
 
@@ -29,12 +31,13 @@ export class UsuarioRepository{
         return this.UsuarioList[index]
     }
 
-    attLivro(cpf: number, name: string, status:boolean, ):void{
+    attLivro(cpf: number, name: string, status:boolean,nameCategoria: string ,nameCurso: string ):void{
         const index = this.UsuarioList.findIndex( est => est.cpf == cpf)
         if(index !== -1){
             this.UsuarioList[index].name = name
             this.UsuarioList[index].status = status
-            this.UsuarioList[index]. = editora
+            this.categoriaList[index].name = nameCategoria
+            this.cursoList[index].name = nameCurso
         }else{
             throw new Error("Cpf não encontrado !!!")
         }
@@ -50,7 +53,7 @@ export class UsuarioRepository{
     procurarcpf( cpf: number):number{
         const index = this.UsuarioList.findIndex( emp => emp.cpf == cpf)
         if(index == -1){
-            throw new Error("ID informado não foi encontrado!!!")
+            throw new Error("Cpf não encontrado !!!")
         }
         return index
     }

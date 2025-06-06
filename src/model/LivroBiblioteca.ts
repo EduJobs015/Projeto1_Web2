@@ -1,4 +1,3 @@
-import { CategoriaLivro } from "./Categoria_Livro"
 export class Livro{
     id: number 
     titulo: string
@@ -21,6 +20,21 @@ export class Livro{
 
 
     private gerarId(): number{
+        return Date.now();
+    }
+}
+export class CategoriaLivro{
+    id: number 
+    name: string
+
+
+    constructor(id: number, name: string){
+        this.id = this.gerarIdCategoria() 
+        this.name = name
+    }
+
+
+    private gerarIdCategoria(): number{
         return Date.now();
     }
 }

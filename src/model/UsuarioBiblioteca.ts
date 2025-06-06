@@ -3,12 +3,12 @@ export class Usuario{
     name: string
     cpf: number 
     status: boolean
-    categoria_id: number // FK ID DA CATEGORIA
+    categoria_id: CategoriaUsuario // FK ID DA CATEGORIA
     curso_id: Cursos// FK ID DO CURSO
 
 
 
-    constructor(id: number, name: string, cpf: number, status: boolean,categoria_id: CategoriaLivro,curso_id: Cursos){  
+    constructor(id: number, name: string, cpf: number, status: boolean,categoria_id: CategoriaUsuario,curso_id: Cursos){  
         this.id = this.gerarId()
         this.name = name
         this.cpf = cpf
