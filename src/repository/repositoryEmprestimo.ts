@@ -6,7 +6,7 @@ export class EmprestimoRepository{
 
     constructor(){}
 
-    static getInstance(): EmprestimoRepository{
+    static getInstanceEmprestimo(): EmprestimoRepository{
         if( !this.instance ){
             this.instance = new EmprestimoRepository()
         }

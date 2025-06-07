@@ -10,7 +10,7 @@ export class UsuarioRepository{
 
     constructor(){}
 
-    static getInstance(): UsuarioRepository{
+    static getInstanceUsuario(): UsuarioRepository{
         if( !this.instance ){
             this.instance = new UsuarioRepository()
         }
@@ -26,15 +26,12 @@ export class UsuarioRepository{
         return this.UsuarioList
     }
 
-    detalhesLivro(cpf:number ){
-        const index = this.procurarcpf(cpf)
-        return this.UsuarioList[index]
-    }
 
-    attLivro(cpf: number, name: string, status:boolean,nameCategoria: string ,nameCurso: string ):void{
+
+    attUsuario(cpf: number, nome: string, status:boolean,nameCategoria: string ,nameCurso: string ):void{
         const index = this.UsuarioList.findIndex( est => est.cpf == cpf)
         if(index !== -1){
-            this.UsuarioList[index].name = name
+            this.UsuarioList[index].nome = nome
             this.UsuarioList[index].status = status
             this.categoriaList[index].name = nameCategoria
             this.cursoList[index].name = nameCurso
@@ -43,9 +40,13 @@ export class UsuarioRepository{
         }
     }
 
-    excluirlivro(cpf: number){
+    excluirUsuario(status: boolean, cpf: number){
         const index = this.procurarcpf(cpf)
-        this.UsuarioList.splice(index)
+        if(status == false)
+            this.UsuarioList.splice(index)
+        else{
+            throw new Error ("O Usuario tem emprestimos pendentes !!")
+        }
 
     }
 

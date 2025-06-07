@@ -1,6 +1,6 @@
 export class Usuario{
     id: number 
-    name: string
+    nome: string
     cpf: number 
     status: boolean
     categoria_id: CategoriaUsuario // FK ID DA CATEGORIA
@@ -8,13 +8,11 @@ export class Usuario{
 
 
 
-    constructor(id: number, name: string, cpf: number, status: boolean,categoria_id: CategoriaUsuario,curso_id: Cursos){  
+    constructor(nome: string, cpf: number, status: boolean){  
         this.id = this.gerarId()
-        this.name = name
+        this.nome = nome
         this.cpf = cpf
         this.status = status
-        this.categoria_id = categoria_id
-        this.curso_id = curso_id
     }
 
 

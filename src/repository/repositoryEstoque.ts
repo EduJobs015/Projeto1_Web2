@@ -6,7 +6,7 @@ export class EstoqueRepository{
 
     constructor(){}
 
-    static getInstance(): EstoqueRepository{
+    static getInstanceEstoque(): EstoqueRepository{
         if( !this.instance ){
             this.instance = new EstoqueRepository()
         }

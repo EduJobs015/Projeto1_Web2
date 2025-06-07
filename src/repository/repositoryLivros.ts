@@ -6,7 +6,7 @@ export class LivroRepository{
 
     constructor(){}
 
-    static getInstance(): LivroRepository{
+    static getInstanceLivro(): LivroRepository{
         if( !this.instance ){
             this.instance = new LivroRepository()
         }
@@ -36,7 +36,7 @@ export class LivroRepository{
             this.LivroList[index].titulo = edicao
             this.LivroList[index].titulo = isbn
         }else{
-            throw new Error("Somente True e False")
+            throw new Error("Livro não encontrado !!!")
         }
     }
 
