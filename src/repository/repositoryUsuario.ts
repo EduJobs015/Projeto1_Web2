@@ -1,62 +1,85 @@
-import { Usuario } from "../model/UsuarioBiblioteca"
-import { Cursos } from "../model/UsuarioBiblioteca"
-import { CategoriaUsuario } from "../model/UsuarioBiblioteca"
+import { Usuario, Cursos, CategoriaUsuario } from "../model/UsuarioBiblioteca";
 
-export class UsuarioRepository{
-    private static instance: UsuarioRepository
-    private UsuarioList: Usuario[] = []
-    private cursoList: Cursos[] = []
-    private categoriaList: CategoriaUsuario[] = []
+export class UsuarioRepository {
+    private static instance: UsuarioRepository;
+    private usuarioList: Usuario[] = [];
+    private cursoList: Cursos[] = [];
+    private categoriaList: CategoriaUsuario[] = [];
 
-    constructor(){}
+    private constructor() {}
 
-    static getInstanceUsuario(): UsuarioRepository{
-        if( !this.instance ){
-            this.instance = new UsuarioRepository()
+    static getInstanceUsuario(): UsuarioRepository {
+        if (!this.instance) {
+            this.instance = new UsuarioRepository();
         }
-        return this.instance
+        return this.instance;
     }
 
-
-    NovoUsuario(novoUsuario:Usuario){
-        this.UsuarioList.push(novoUsuario)
+    // Usuário
+    novoUsuario(novoUsuario: Usuario): void {
+        this.usuarioList.push(novoUsuario);
     }
 
-    todosUsuarios():Usuario[]{
-        return this.UsuarioList
+    todosUsuarios(): Usuario[] {
+        return this.usuarioList;
     }
 
-
-
-    attUsuario(cpf: number, nome: string, status:boolean,nameCategoria: string ,nameCurso: string ):void{
-        const index = this.UsuarioList.findIndex( est => est.cpf == cpf)
-        if(index !== -1){
-            this.UsuarioList[index].nome = nome
-            this.UsuarioList[index].status = status
-            this.categoriaList[index].name = nameCategoria
-            this.cursoList[index].name = nameCurso
-        }else{
-            throw new Error("Cpf não encontrado !!!")
-        }
+    procurarCpf(cpf: string): Usuario | null {
+        return this.usuarioList.find(u => u.cpf === cpf) || null;
     }
 
-    excluirUsuario(status: boolean, cpf: number){
-        const index = this.procurarcpf(cpf)
-        if(status == false)
-            this.UsuarioList.splice(index)
-        else{
-            throw new Error ("O Usuario tem emprestimos pendentes !!")
+    atualizarUsuario(cpf: string, nome: string, status: boolean, cursoId: number, categoriaId: number): void {
+        const usuario = this.usuarioList.find(u => u.cpf === cpf);
+        if (!usuario) {
+            throw new Error("CPF não encontrado!");
         }
 
+        usuario.nome = nome;
+        usuario.status = status;
+        usuario.cursoId = cursoId;
+        usuario.categoriaId = categoriaId;
     }
 
-
-    procurarcpf( cpf: number):number{
-        const index = this.UsuarioList.findIndex( emp => emp.cpf == cpf)
-        if(index == -1){
-            throw new Error("Cpf não encontrado !!!")
+    excluirUsuario(status: boolean, cpf: string): void {
+        if (status !== false) {
+            throw new Error("O usuário tem empréstimos pendentes!");
         }
-        return index
+
+        const index = this.usuarioList.findIndex(u => u.cpf === cpf);
+        if (index === -1) {
+            throw new Error("CPF não encontrado!");
+        }
+
+        this.usuarioList.splice(index, 1);
     }
 
+    // Cursos
+    adicionarCurso(nome: string): Cursos {
+        const novoCurso = new Cursos(nome);
+        this.cursoList.push(novoCurso);
+        return novoCurso;
+    }
+
+    listarCursos(): Cursos[] {
+        return this.cursoList;
+    }
+
+    // Categorias
+    adicionarCategoria(nome: string): CategoriaUsuario {
+        const novaCategoria = new CategoriaUsuario(nome);
+        this.categoriaList.push(novaCategoria);
+        return novaCategoria;
+    }
+
+    listarCategorias(): CategoriaUsuario[] {
+        return this.categoriaList;
+    }
+
+    getCursoPorId(id: number): Cursos | undefined {
+        return this.cursoList.find(c => c.id === id);
+    }
+
+    getCategoriaPorId(id: number): CategoriaUsuario | undefined {
+        return this.categoriaList.find(cat => cat.id === id);
+    }
 }

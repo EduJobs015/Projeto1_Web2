@@ -1,59 +1,49 @@
-export class Usuario{
-    id: number 
-    nome: string
-    cpf: number 
-    status: boolean
-    categoria_id: CategoriaUsuario // FK ID DA CATEGORIA
-    curso_id: Cursos// FK ID DO CURSO
+export class Usuario {
+    readonly id: number;
+    nome: string;
+    cpf: string;
+    status: boolean;
+    categoriaId: number; // FK
+    cursoId: number;     // FK
 
-
-
-    constructor(nome: string, cpf: number, status: boolean){  
-        this.id = this.gerarId()
-        this.nome = nome
-        this.cpf = cpf
-        this.status = status
+    constructor(nome: string, cpf: string, status: boolean, cursoId: number, categoriaId: number) {
+        this.id = this.gerarId();
+        this.nome = nome;
+        this.cpf = cpf;
+        this.status = status;
+        this.cursoId = cursoId;
+        this.categoriaId = categoriaId;
     }
 
-
-
-
-    private gerarId(): number{
-        return Date.now();
-    
+    private gerarId(): number {
+        return Date.now()
     }
 }
 
-export class Cursos{
-    id: number 
-    name: string
+export class Cursos {
+    readonly id: number;
+    nome: string;
 
-
-    constructor(id: number, name: string){
-        this.id = this.gerarIdCurso() 
-        this.name = name
+    constructor(nome: string) {
+        this.id = this.gerarId();
+        this.nome = nome;
     }
 
-
-    private gerarIdCurso(): number{
-        return Date.now();
+    private gerarId(): number {
+        return Date.now() 
     }
 }
 
-export class CategoriaUsuario{
-    id: number 
-    name: string
+export class CategoriaUsuario {
+    readonly id: number;
+    nome: string;
 
-
-    constructor(id: number, name: string){
-        this.id = this.gerarId() 
-        this.name = name
+    constructor(nome: string) {
+        this.id = this.gerarId();
+        this.nome = nome;
     }
 
-
-    private gerarId(): number{
-        return Date.now();
+    private gerarId(): number {
+        return Date.now()
     }
 }
-
-

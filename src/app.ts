@@ -1,10 +1,29 @@
-import express from "express"
+import express from "express";
+import { UsuarioController, CursoController, CategoriaController} from "./controller/ControllerUsuario";
 
+const app = express();
+const port = process.env.PORT ?? 3090;
 
-const app = express()
+app.use(express.json());
 
-const PORT = process.env.PORT ?? 3090
+const usuarioController = new UsuarioController();
+const cursoController = new CursoController();
+const categoriaController = new CategoriaController();
 
-app.use(express.json())
+// Usuários
+app.post("/api/usuarios", usuarioController.criarUsuario);
+app.get("/api/usuarios", usuarioController.listarUsuarios);
+app.put("/api/usuarios/:cpf", usuarioController.atualizarUsuario);
+app.delete("/api/usuarios/:cpf", usuarioController.deletarUsuario);
 
-app.post("/api/")
+// Cursos
+app.get("/api/cursos", cursoController.listarCursos);
+app.post("/api/cursos", cursoController.criarCurso);
+
+// Categorias
+app.get("/api/categorias", categoriaController.listarCategorias);
+app.post("/api/categorias", categoriaController.criarCategoria);
+
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
+});
