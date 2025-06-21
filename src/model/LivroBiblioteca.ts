@@ -1,3 +1,4 @@
+import { CategoriaLivro } from "./CategoriaLivro"
 export class Livro{
     id: number 
     titulo: string
@@ -7,7 +8,7 @@ export class Livro{
     isbn: string
     categoriaLivro_id: CategoriaLivro // FK ID DA CATEGORIA 
 
-    constructor(id: number,titulo: string,autor: string,editora: string,edicao: string,isbn: string,categoriaLivro_id: CategoriaLivro){
+    constructor(titulo: string,autor: string,editora: string,edicao: string,isbn: string,categoriaLivro_id: CategoriaLivro){
         this.id = this.gerarId()
         this.titulo = titulo
         this.autor = autor
@@ -20,21 +21,6 @@ export class Livro{
 
 
     private gerarId(): number{
-        return Date.now();
-    }
-}
-export class CategoriaLivro{
-    id: number 
-    name: string
-
-
-    constructor(id: number, name: string){
-        this.id = this.gerarIdCategoria() 
-        this.name = name
-    }
-
-
-    private gerarIdCategoria(): number{
         return Date.now();
     }
 }

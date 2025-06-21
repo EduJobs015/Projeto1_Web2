@@ -27,7 +27,7 @@ export class UsuarioController {
       const cpf = req.params.cpf;
       const data = req.body;
 
-      // Supondo que seu service tenha um método atualizarUsuario(cpf, dados)
+      
       this.usuarioService.atualizarUsuario(cpf, data);
 
       res.json({ message: "Usuário atualizado com sucesso." });
@@ -40,7 +40,7 @@ export class UsuarioController {
     try {
       const cpf = req.params.cpf;
 
-      // Supondo que seu service tenha método deletarUsuario(cpf)
+      
       this.usuarioService.deletarUsuario(cpf);
 
       res.json({ message: "Usuário deletado com sucesso." });
