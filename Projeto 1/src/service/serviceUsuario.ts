@@ -40,7 +40,7 @@ export class UsuarioService {
   suspenderUsuario(usuario: Usuario, diasAtraso: number): void {
     const diasSuspensao = diasAtraso * 3;
     if (diasSuspensao > 60) {
-      usuario.status = false; // suspenso até regularização
+      usuario.status = false; 
     }
   }
 

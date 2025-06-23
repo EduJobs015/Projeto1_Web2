@@ -19,7 +19,7 @@ export class UsuarioController {
     }
   };
 
-  listarUsuarios = (res: Response): void => {
+  listarUsuarios = (_req: Request,res: Response): void => {
     try {
       const lista = this.service.listar();
       if (lista.length === 0) {

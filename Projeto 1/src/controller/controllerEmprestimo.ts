@@ -8,11 +8,11 @@ export class EmprestimoController {
 
   realizarEmprestimo = (req: Request, res: Response): void => {
     try {
-      const { cpf, idEstoque } = req.body;
+      const { cpf, estoqueId  } = req.body;
 
       const usuario = UsuarioRepository.getInstance().buscarPorCpf(cpf);
-      const estoque = EstoqueRepository.getInstance().buscarPorId(Number(idEstoque));
-
+      const estoque = EstoqueRepository.getInstance().buscarPorId(Number(estoqueId ));
+      
       if (!usuario) throw new Error("Usuário não encontrado.");
       if (!estoque) throw new Error("Livro não encontrado.");
 
@@ -23,7 +23,7 @@ export class EmprestimoController {
     }
   };
 
-  listarTodos = (res: Response): void => {
+  listarTodos = (_req: Request,res: Response): void => {
     try {
       const lista = this.service.listarTodos();
       res.status(200).json(lista);

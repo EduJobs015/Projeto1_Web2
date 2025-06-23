@@ -29,7 +29,7 @@ export class LivroController {
   };
 
   
-  listarLivros = (res: Response): void => {
+  listarLivros = (_req: Request,res: Response): void => {
     try {
       const livros = this.livroService.listarLivros();
       if (livros.length === 0) {

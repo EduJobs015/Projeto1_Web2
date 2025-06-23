@@ -24,7 +24,7 @@ export class EstoqueController {
     }
   };
 
-  listarDisponiveis = (res: Response): void => {
+  listarDisponiveis = (_req: Request,res: Response): void => {
     try {
       const lista = this.service.listarTodos();
       if (lista.length === 0) {

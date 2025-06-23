@@ -18,7 +18,7 @@ export class EstoqueService {
       throw new Error("Quantidade emprestada não pode ser maior que a quantidade total.");
     }
 
-    const estoqueExistente = this.repository.listarTodos().find(e => e.quantidade_emprestada === quantidadeEmprestada);
+    const estoqueExistente = this.repository.listarTodos().find(e => e.livro_id.isbn === livro.isbn);
 
     if (estoqueExistente) {
       throw new Error("Já existe um exemplar com essa quantidade emprestada para esse livro.");
