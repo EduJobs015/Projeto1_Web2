@@ -26,7 +26,7 @@ export class EstoqueController {
 
   listarDisponiveis = (req: Request, res: Response): void => {
     try {
-      const lista = this.service.listarDisponiveis();
+      const lista = this.service.listarTodos();
       if (lista.length === 0) {
         res.status(200).json({ mensagem: "Nenhum exemplar disponível." });
         return;

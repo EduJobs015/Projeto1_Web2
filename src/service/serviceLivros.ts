@@ -50,9 +50,9 @@ export class LivroService {
   }
 
   removerLivro(id: number): void {
-    // Aqui você pode colocar uma regra como:
-    const estaEmprestado = false; // Simulação
-    if (estaEmprestado) {
+    const emprestado = false
+
+    if (emprestado) {
       throw new Error("Livro está emprestado e não pode ser removido.");
     }
 

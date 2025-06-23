@@ -18,9 +18,9 @@ export class EstoqueRepository {
     this.estoqueList.push(estoque);
   }
 
-  listarDisponiveis(): Estoque[] {
-    return this.estoqueList.filter(e => e.disponibilidade);
-  }
+  listarTodos(): Estoque[] {
+  return this.estoqueList;
+}
 
   buscarPorId(id: number): Estoque | undefined {
     return this.estoqueList.find(e => e.id === id);
