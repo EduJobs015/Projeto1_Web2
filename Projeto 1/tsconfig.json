@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es2020", // ou "es2022" se quiser mais moderno, mas "es2024" ainda é experimental
+    "module": "commonjs",
+    "outDir": "dist",
+    "rootDir": "src", // define a raiz dos arquivos TypeScript
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true, // útil se importar arquivos .json
+    "noImplicitAny": true, // força a tipagem explícita
+    "noUnusedLocals": true, // ajuda a limpar código
+    "noUnusedParameters": true, // idem
+    "experimentalDecorators": true, // caso venha a usar decorators no futuro
+    "emitDecoratorMetadata": true // idem
+  },
+  "include": ["src/**/*"],
+}
