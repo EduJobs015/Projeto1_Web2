@@ -5,7 +5,6 @@ import { CategoriaLivro } from "../model/CategoriaLivro";
 export class LivroController {
   private livroService = new LivroService();
 
-  // POST /livros
   criarLivro = (req: Request, res: Response): void => {
     try {
       const { titulo, autor, editora, edicao, isbn, categoriaNome } = req.body;
@@ -29,7 +28,7 @@ export class LivroController {
     }
   };
 
-  // GET /livros
+  
   listarLivros = (req: Request, res: Response): void => {
     try {
       const livros = this.livroService.listarLivros();
@@ -42,7 +41,7 @@ export class LivroController {
     }
   };
 
-  // GET /livros/:id
+  
   buscarLivroPorId = (req: Request, res: Response): void => {
     try {
       const id = Number(req.params.id);
@@ -53,7 +52,7 @@ export class LivroController {
     }
   };
 
-  // PUT /livros/:id
+  
   atualizarLivro = (req: Request, res: Response): void => {
     try {
       const id = Number(req.params.id);
@@ -68,7 +67,7 @@ export class LivroController {
     }
   };
 
-  // DELETE /livros/:id
+  
   removerLivro = (req: Request, res: Response): void => {
     try {
       const id = Number(req.params.id);

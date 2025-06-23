@@ -38,18 +38,19 @@ export class EstoqueController {
   };
 
   buscarPorId = (req: Request, res: Response): void => {
-    try {
-      const id = Number(req.params.id);
-      const exemplar = this.service.buscarPorId(id);
-      res.status(200).json(exemplar);
-    } catch (error: any) {
-      res.status(404).json({ erro: error.message });
-    }
-  };
+  try {
+    const codigo = Number(req.params.codigo); // <-- ajustado
+    const exemplar = this.service.buscarPorId(codigo);
+
+    res.status(200).json(exemplar); // já retorna no formato esperado
+  } catch (error: any) {
+    res.status(404).json({ erro: error.message });
+  }
+};
 
   atualizarEstoque = (req: Request, res: Response): void => {
     try {
-      const id = Number(req.params.id);
+      const id = Number(req.params.codigo);
       const { quantidade, quantidadeEmprestada } = req.body;
       this.service.atualizar(id, quantidade, quantidadeEmprestada);
       res.status(200).json({ mensagem: "Estoque atualizado com sucesso!" });

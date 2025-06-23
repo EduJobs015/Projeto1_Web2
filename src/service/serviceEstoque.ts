@@ -35,7 +35,7 @@ export class EstoqueService {
 
   buscarPorId(id: number): Estoque {
     const est = this.repository.buscarPorId(id);
-    if (!est) throw new Error("Estoque não encontrado.");
+    if (!est) throw new Error("livro não encontrado.");
     return est;
   }
 

@@ -27,13 +27,24 @@ export class EstoqueRepository {
   }
 
   atualizarEstoque(id: number, quantidade: number, quantidadeEmprestada: number): void {
-    const estoque = this.buscarPorId(id);
-    if (!estoque) throw new Error("Estoque não encontrado.");
+  const estoque = this.buscarPorId(id);
 
-    estoque.quantidade = quantidade;
-    estoque.quantidade_emprestada = quantidadeEmprestada;
-    estoque.disponibilidade = quantidade > quantidadeEmprestada;
+  if (!estoque) {
+    throw new Error("Estoque não encontrado.");
   }
+
+  if (quantidade < 0 || quantidadeEmprestada < 0) {
+    throw new Error("Valores inválidos.");
+  }
+
+  if (quantidadeEmprestada > quantidade) {
+    throw new Error("Quantidade emprestada não pode ser maior que a quantidade total.");
+  }
+
+  estoque.quantidade = quantidade;
+  estoque.quantidade_emprestada = quantidadeEmprestada;
+  estoque.disponibilidade = quantidade > quantidadeEmprestada;
+}
 
   remover(id: number): void {
     const index = this.estoqueList.findIndex(e => e.id === id);
