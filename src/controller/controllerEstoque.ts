@@ -61,7 +61,7 @@ export class EstoqueController {
 
   removerEstoque = (req: Request, res: Response): void => {
     try {
-      const id = Number(req.params.id);
+      const id = Number(req.params.codigo);
       this.service.remover(id);
       res.status(200).json({ mensagem: "Estoque removido com sucesso!" });
     } catch (error: any) {

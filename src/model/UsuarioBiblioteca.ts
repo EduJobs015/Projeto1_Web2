@@ -1,12 +1,14 @@
+import { CategoriaUsuario } from "./CatergoriaUsuario";
+import { Cursos } from "./CursoUsuario";
 export class Usuario {
     readonly id: number;
     nome: string;
     cpf: string;
     status: boolean;
-    categoriaId: number; // FK
-    cursoId: number;     // FK
+    categoriaId: CategoriaUsuario; // FK
+    cursoId: Cursos;     // FK
 
-    constructor(nome: string, cpf: string, status: boolean, cursoId: number, categoriaId: number) {
+    constructor(nome: string, cpf: string, status: boolean, cursoId: Cursos, categoriaId: CategoriaUsuario) {
         this.id = this.gerarId();
         this.nome = nome;
         this.cpf = cpf;
@@ -20,30 +22,4 @@ export class Usuario {
     }
 }
 
-export class Cursos {
-    readonly id: number;
-    nome: string;
 
-    constructor(nome: string) {
-        this.id = this.gerarId();
-        this.nome = nome;
-    }
-
-    private gerarId(): number {
-        return Date.now() 
-    }
-}
-
-export class CategoriaUsuario {
-    readonly id: number;
-    nome: string;
-
-    constructor(nome: string) {
-        this.id = this.gerarId();
-        this.nome = nome;
-    }
-
-    private gerarId(): number {
-        return Date.now()
-    }
-}

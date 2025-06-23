@@ -1,85 +1,46 @@
-import { Usuario, Cursos, CategoriaUsuario } from "../model/UsuarioBiblioteca";
+import { Usuario } from "../model/UsuarioBiblioteca";
 
 export class UsuarioRepository {
-    private static instance: UsuarioRepository;
-    private usuarioList: Usuario[] = [];
-    private cursoList: Cursos[] = [];
-    private categoriaList: CategoriaUsuario[] = [];
+  private static instance: UsuarioRepository;
+  private usuarios: Usuario[] = [];
 
-    private constructor() {}
+  private constructor() {}
 
-    static getInstanceUsuario(): UsuarioRepository {
-        if (!this.instance) {
-            this.instance = new UsuarioRepository();
-        }
-        return this.instance;
+  static getInstance(): UsuarioRepository {
+    if (!this.instance) {
+      this.instance = new UsuarioRepository();
     }
+    return this.instance;
+  }
 
-    // Usuário
-    novoUsuario(novoUsuario: Usuario): void {
-        this.usuarioList.push(novoUsuario);
+  adicionar(usuario: Usuario): void {
+    if (this.usuarios.find(u => u.cpf === usuario.cpf)) {
+      throw new Error("CPF já cadastrado.");
     }
+    this.usuarios.push(usuario);
+  }
 
-    todosUsuarios(): Usuario[] {
-        return this.usuarioList;
-    }
+  listar(): Usuario[] {
+    return this.usuarios;
+  }
 
-    procurarCpf(cpf: string): Usuario | null {
-        return this.usuarioList.find(u => u.cpf === cpf) || null;
-    }
+  buscarPorCpf(cpf: string): Usuario | undefined {
+    return this.usuarios.find(u => u.cpf === cpf);
+  }
 
-    atualizarUsuario(cpf: string, nome: string, status: boolean, cursoId: number, categoriaId: number): void {
-        const usuario = this.usuarioList.find(u => u.cpf === cpf);
-        if (!usuario) {
-            throw new Error("CPF não encontrado!");
-        }
+  atualizar(cpf: string, dados: Partial<Usuario>): void {
+    const usuario = this.buscarPorCpf(cpf);
+    if (!usuario) throw new Error("Usuário não encontrado.");
 
-        usuario.nome = nome;
-        usuario.status = status;
-        usuario.cursoId = cursoId;
-        usuario.categoriaId = categoriaId;
-    }
+    if (dados.nome) usuario.nome = dados.nome;
+    if (dados.status !== undefined) usuario.status = dados.status;
+    if (dados.categoriaId) usuario.categoriaId = dados.categoriaId;
+    if (dados.cursoId) usuario.cursoId = dados.cursoId;
+  }
 
-    excluirUsuario(status: boolean, cpf: string): void {
-        if (status !== false) {
-            throw new Error("O usuário tem empréstimos pendentes!");
-        }
-
-        const index = this.usuarioList.findIndex(u => u.cpf === cpf);
-        if (index === -1) {
-            throw new Error("CPF não encontrado!");
-        }
-
-        this.usuarioList.splice(index, 1);
-    }
-
-    // Cursos
-    adicionarCurso(nome: string): Cursos {
-        const novoCurso = new Cursos(nome);
-        this.cursoList.push(novoCurso);
-        return novoCurso;
-    }
-
-    listarCursos(): Cursos[] {
-        return this.cursoList;
-    }
-
-    // Categorias
-    adicionarCategoria(nome: string): CategoriaUsuario {
-        const novaCategoria = new CategoriaUsuario(nome);
-        this.categoriaList.push(novaCategoria);
-        return novaCategoria;
-    }
-
-    listarCategorias(): CategoriaUsuario[] {
-        return this.categoriaList;
-    }
-
-    getCursoPorId(id: number): Cursos | undefined {
-        return this.cursoList.find(c => c.id === id);
-    }
-
-    getCategoriaPorId(id: number): CategoriaUsuario | undefined {
-        return this.categoriaList.find(cat => cat.id === id);
-    }
+  remover(cpf: string): void {
+    const index = this.usuarios.findIndex(u => u.cpf === cpf);
+    if (index === -1) throw new Error("Usuário não encontrado.");
+    this.usuarios.splice(index, 1);
+  }
 }

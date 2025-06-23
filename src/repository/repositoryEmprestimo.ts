@@ -1,39 +1,36 @@
 import { Emprestimo } from "../model/EmprestimoBibliopteca";
 
-export class EmprestimoRepository{
-    private static instance: EmprestimoRepository
-    private emprestimoList: Emprestimo[] = []
+export class EmprestimoRepository {
+  private static instance: EmprestimoRepository;
+  private emprestimos: Emprestimo[] = [];
 
-    constructor(){}
+  private constructor() {}
 
-    static getInstanceEmprestimo(): EmprestimoRepository{
-        if( !this.instance ){
-            this.instance = new EmprestimoRepository()
-        }
-        return this.instance
+  static getInstance(): EmprestimoRepository {
+    if (!this.instance) {
+      this.instance = new EmprestimoRepository();
     }
+    return this.instance;
+  }
 
-    addEmprestimo(exemplar: Emprestimo){
-        this.emprestimoList.push(exemplar)
-    }
+  salvar(emprestimo: Emprestimo): void {
+    this.emprestimos.push(emprestimo);
+  }
 
-    listEmprestimo():Emprestimo[]{
-        return this.emprestimoList
-    }
+  listar(): Emprestimo[] {
+    return this.emprestimos;
+  }
 
-    deletEmprestimo(id: number){
-        const index = this.procurarIndex(id)
-        this.emprestimoList.splice(index)
+  listarPorUsuario(cpf: string): Emprestimo[] {
+    return this.emprestimos.filter(e => e.usuario_id.cpf === cpf);
+  }
 
-    }
-
-
-    procurarIndex( id: number):number{
-        const index = this.emprestimoList.findIndex( est => est.id == id)
-        if(index == -1){
-            throw new Error("ID informado não foi encontrado!!!")
-        }
-        return index
-    }
-
+  buscarPorId(id: number): Emprestimo | undefined {
+    return this.emprestimos.find(e => e.id === id);
+  }
+  atualizar(emprestimoAtualizado: Emprestimo): void {
+    const index = this.emprestimos.findIndex(e => e.id === emprestimoAtualizado.id);
+    if (index === -1) throw new Error("Empréstimo não encontrado.");
+    this.emprestimos[index] = emprestimoAtualizado;
+  }
 }

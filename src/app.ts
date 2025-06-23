@@ -1,6 +1,8 @@
 import express from "express";
 import { LivroController } from "./controller/controllerLivro";
 import { EstoqueController } from "./controller/controllerEstoque";
+import { UsuarioController } from "./controller/ControllerUsuario";
+import { EmprestimoController } from "./controller/controllerEmprestimo";
 
 const app = express();
 const port = process.env.PORT ?? 3090;
@@ -9,6 +11,20 @@ app.use(express.json());
 
 const estoqueController = new EstoqueController();
 const livroController = new LivroController();
+const usuarioController = new UsuarioController();
+const emprestimoController = new EmprestimoController();
+
+// Rotas para Emprestimo 
+app.post("/api/emprestimos", emprestimoController.realizarEmprestimo);
+app.get("/api/emprestimos", emprestimoController.listarTodos);
+app.put("/api/emprestimos/:id/devolucao", emprestimoController.registrarDevolucao);
+
+// Rotas para Usuario de Livros
+app.post("/library/usuarios", usuarioController.criarUsuario);
+app.get("/library/usuarios", usuarioController.listarUsuarios);
+app.get("/library/usuarios/:cpf", usuarioController.buscarUsuario);
+app.put("/library/usuarios/:cpf", usuarioController.atualizarUsuario);
+app.delete("/library/usuarios/:cpf", usuarioController.deletarUsuario);
 
 
 // Rotas para Emprestimo de Livro 
