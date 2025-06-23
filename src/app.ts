@@ -1,6 +1,7 @@
 import express from "express";
 //import { UsuarioController, CursoController, CategoriaController } from "./controller/ControllerUsuario"; 
 import { LivroController } from "./controller/controllerLivro";
+import { EstoqueController } from "./controller/controllerEstoque";
 
 const app = express();
 const port = process.env.PORT ?? 3090;
@@ -11,6 +12,7 @@ app.use(express.json());
 //const usuarioController = new UsuarioController();
 //const cursoController = new CursoController();
 //const categoriaController = new CategoriaController();
+const estoqueController = new EstoqueController();
 const livroController = new LivroController();
 
 // Rotas de Usuários
@@ -28,6 +30,13 @@ const livroController = new LivroController();
 //app.get("/api/categorias", categoriaController.listarCategorias);
 //app.post("/api/categorias", categoriaController.criarCategoria);
 
+// Rotas para Emprestimo de Livro 
+app.post("/api/estoque", estoqueController.criarEstoque);
+app.get("/api/estoque", estoqueController.listarDisponiveis);
+app.get("/api/estoque/:codigo", estoqueController.buscarPorId);
+app.put("/api/estoque/:codigo", estoqueController.atualizarEstoque);
+app.delete("/api/estoque/:codigo", estoqueController.removerEstoque);
+
 // Rotas de Livros
 app.post("/api/livros", livroController.criarLivro);
 app.get("/api/livros", livroController.listarLivros);
@@ -38,3 +47,4 @@ app.delete("/api/livros/:id", livroController.removerLivro);
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
+
