@@ -3,6 +3,7 @@ import { LivroController } from "./controller/controllerLivro";
 import { EstoqueController } from "./controller/controllerEstoque";
 import { UsuarioController } from "./controller/ControllerUsuario";
 import { EmprestimoController } from "./controller/controllerEmprestimo";
+import { CategoriaController } from "./controller/controllerCategoria";
 
 const app = express();
 const port = process.env.PORT ?? 3090;
@@ -13,6 +14,13 @@ const estoqueController = new EstoqueController();
 const livroController = new LivroController();
 const usuarioController = new UsuarioController();
 const emprestimoController = new EmprestimoController();
+const categoriaController = new CategoriaController();
+
+
+// Rotas para categoria
+app.get("/catalogos/categorias-usuario", categoriaController.getCategoriasUsuario);
+app.get("/catalogos/categorias-livro", categoriaController.getCategoriasLivro);
+app.get("/catalogos/cursos", categoriaController.getCursos);
 
 // Rotas para Emprestimo 
 app.post("/api/emprestimos", emprestimoController.realizarEmprestimo);
