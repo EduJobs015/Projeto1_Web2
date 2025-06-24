@@ -18,9 +18,9 @@ const categoriaController = new CategoriaController();
 
 
 // Rotas para categoria
-app.get("/catalogos/categorias-usuario", categoriaController.getCategoriasUsuario);
-app.get("/catalogos/categorias-livro", categoriaController.getCategoriasLivro);
-app.get("/catalogos/cursos", categoriaController.getCursos);
+app.get("/api/categorias-usuario", categoriaController.getCategoriasUsuario);
+app.get("/api/categorias-livro", categoriaController.getCategoriasLivro);
+app.get("/api/cursos", categoriaController.getCursos);
 
 // Rotas para Emprestimo 
 app.post("/api/emprestimos", emprestimoController.realizarEmprestimo);
