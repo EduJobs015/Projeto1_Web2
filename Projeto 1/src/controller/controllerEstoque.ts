@@ -39,10 +39,10 @@ export class EstoqueController {
 
   buscarPorId = (req: Request, res: Response): void => {
   try {
-    const codigo = Number(req.params.codigo); // <-- ajustado
+    const codigo = Number(req.params.codigo); 
     const exemplar = this.service.buscarPorId(codigo);
 
-    res.status(200).json(exemplar); // já retorna no formato esperado
+    res.status(200).json(exemplar); 
   } catch (error: any) {
     res.status(404).json({ erro: error.message });
   }

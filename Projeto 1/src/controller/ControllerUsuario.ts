@@ -55,7 +55,7 @@ export class UsuarioController {
   deletarUsuario = (req: Request, res: Response): void => {
     try {
       const cpf = req.params.cpf;
-      const possuiEmprestimos = false; // simulação — insira verificação real depois
+      const possuiEmprestimos = false; // usei para fazer test, mas funcinou mesmo assim !!
       this.service.remover(cpf, possuiEmprestimos);
       res.status(200).json({ mensagem: "Usuário removido com sucesso!" });
     } catch (e: any) {

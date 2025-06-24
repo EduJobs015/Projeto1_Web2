@@ -1,4 +1,3 @@
-// repository/repositoryCatalogo.ts
 import { CategoriaUsuario } from "../model/CatergoriaUsuario";
 import { CategoriaLivro } from "../model/CategoriaLivro";
 import { Cursos } from "../model/CursoUsuario";

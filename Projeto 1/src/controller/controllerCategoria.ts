@@ -1,4 +1,3 @@
-// controller/controllerCatalogo.ts
 import { Request, Response } from "express";
 import { CategoriaService } from "../service/serviceCategorias";
 

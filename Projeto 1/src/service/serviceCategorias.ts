@@ -1,4 +1,3 @@
-// service/serviceCatalogo.ts
 import { CategoriaRepository } from "../repository/repositoryCategoria";
 
 export class CategoriaService {
